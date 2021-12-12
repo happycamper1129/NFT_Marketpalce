@@ -2,28 +2,22 @@ import {Fragment} from 'react'
 import {Popover, Transition} from '@headlessui/react'
 import {MenuIcon, XIcon} from '@heroicons/react/outline'
 import {ChevronDownIcon} from '@heroicons/react/solid'
-import {login, logout} from "../../utils/contract-utils";
-import {Link} from "react-router-dom";
+import {login, logout} from "../utils/contract-utils";
 
 const exploreTabs = [
-    {name: 'NFTs', path: '/nft'},
-    {name: 'Collections', path: '/collections'},
+    {name: 'NFTs'}, {name: 'Collections'}
 ];
 
 const createTabs = [
-    {name: 'NFT', path: '/create-nft'},
-    {name: 'Collection', path: '/create-collection'}
+    {name: 'NFT'}, {name: 'Collection'}
 ];
 
 const profileTabs = [
-    {name: 'My NFTs', path: '/my-nft'},
-    {name: 'My Collections', path: '/my-collection'},
-    {name: 'Sign out', path: '/logout'}
+    {name: 'My NFTs'}, {name: 'My Collections'}, {name: 'Sign out'}
 ];
 
 const singleTabs = [
-    {name: 'Launchpad', path: '/launchpad'},
-    {name: 'Docs', path: '/docs'}
+    {name: 'Launchpad'}, {name: 'Docs'}
 ];
 
 function classNames(...classes) {
@@ -37,7 +31,7 @@ function openTab(tabName) {
     }
 }
 
-function TabsDropDownMenu({name, tabs, isProfile}) {
+function NavItemWithDrop(props){
     return (
         <Popover className="relative">
             {({open}) => (
@@ -45,12 +39,10 @@ function TabsDropDownMenu({name, tabs, isProfile}) {
                     <Popover.Button
                         className={classNames(
                             open ? 'text-gray-900' : 'text-gray-500',
-                            'group bg-white rounded-md inline-flex items-center ' +
-                            'text-base font-medium hover:text-gray-900 focus:outline-none ' +
-                            'focus:ring-2 focus:ring-offset-4 focus:ring-indigo-500'
+                            'group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
                         )}
                     >
-                        {name}
+                        <span>{props.name}</span>
                         <ChevronDownIcon
                             className={classNames(
                                 open ? 'text-gray-600' : 'text-gray-400',
@@ -71,20 +63,22 @@ function TabsDropDownMenu({name, tabs, isProfile}) {
                     >
                         <Popover.Panel
                             className={classNames(
-                                isProfile ? '-ml-20' : '-ml-4',
+                                props.isProfile ? '-ml-20' : '-ml-4',
                                 "absolute z-10 -ml-4 mt-3 transform px-2"
                             )}>
-                            <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
+                            <div
+                                className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
                                 <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
-                                    {tabs.map((item) => (
-                                        <Link to={item.path}>
-                                            <div
-                                                className="cursor-pointer -m-3 p-3 flex items-start rounded-lg hover:bg-gray-50"
-                                                key={item.name}
-                                            >
+                                    {props.data.map((item) => (
+                                        <a
+                                            key={item.name}
+                                            onClick={() => openTab(item.name)}
+                                            className="cursor-pointer -m-3 p-3 flex items-start rounded-lg hover:bg-gray-50"
+                                        >
+                                            <div className="ml-4">
                                                 <p className="text-base font-medium text-gray-900">{item.name}</p>
                                             </div>
-                                        </Link>
+                                        </a>
                                     ))}
                                 </div>
                             </div>
@@ -96,10 +90,10 @@ function TabsDropDownMenu({name, tabs, isProfile}) {
     )
 }
 
-function NavSmallItem({tabs}) {
+function NavSmallItem(props){
     return (
         <div className="grid grid-cols-2 gap-y-4 gap-x-8">
-            {tabs.map((item) => (
+            {props.data.map((item) => (
                 <a
                     key={item.name}
                     onClick={() => openTab(item.name)}
@@ -137,18 +131,10 @@ export default function NavBar() {
                         </Popover.Button>
                     </div>
                     <Popover.Group as="nav" className="hidden md:flex space-x-10">
-                        <TabsDropDownMenu name="Explore" tabs={exploreTabs} isProfile={false}/>
-                        <TabsDropDownMenu name="Create" tabs={createTabs} isProfile={false}/>
+
+                        <NavItemWithDrop name="Explore" data={exploreTabs} isProfile={false}/>
+                        <NavItemWithDrop name="Create" data={createTabs} isProfile={false}/>
                         {singleTabs.map((item) => (
-                            // <div
-                            //     className={classNames(
-                            //         item.name === "Launchpad" ? 'cursor-not-allowed' : 'cursor-pointer',
-                            //         "text-base font-medium text-gray-500 hover:text-gray-900"
-                            //     )}
-                            //     key={item.name}
-                            // >
-                            //     <Link to={item.path}>{item.name}</Link>
-                            // </div>
                             <a
                                 key={item.name}
                                 onClick={() => openTab(item.name)}
@@ -163,7 +149,7 @@ export default function NavBar() {
                     </Popover.Group>
                     {window.walletConnection.isSignedIn() ? (
                         <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
-                            <TabsDropDownMenu name="Profile" tabs={profileTabs} isProfile={true}/>
+                            <NavItemWithDrop name="Profile" data={profileTabs} isProfile={true}/>
                         </div>
                     ) : (
                         <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
@@ -212,33 +198,33 @@ export default function NavBar() {
                         </div>
                         <div className="py-6 px-5 space-y-6">
                             <div className="text-indigo-500">Explore:</div>
-                            <NavSmallItem tabs={exploreTabs}/>
+                            <NavSmallItem data={exploreTabs}/>
                         </div>
                         <div className="py-6 px-5 space-y-6">
                             <div className="text-indigo-500">Create:</div>
-                            <NavSmallItem tabs={createTabs}/>
+                            <NavSmallItem data={createTabs}/>
                         </div>
                         <div className="py-6 px-5 space-y-6">
-                            <NavSmallItem tabs={singleTabs}/>
+                            <NavSmallItem data={singleTabs}/>
                             {window.walletConnection.isSignedIn() ? (
                                 <>
-                                    <div className="grid grid-cols-2 gap-y-4 gap-x-8">
-                                        {profileTabs.filter(item => item.name !== 'Sign out').map((item) => (
-                                            <a
-                                                key={item.name}
-                                                // onClick={() => openTab(item.name)}
-                                                className="cursor-pointer text-base font-medium text-gray-900 hover:text-gray-500"
-                                            >
-                                                {item.name}
-                                            </a>
-                                        ))}
+                                <div className="grid grid-cols-2 gap-y-4 gap-x-8">
+                                    {profileTabs.filter(item => item.name !== 'Sign out').map((item) => (
                                         <a
-                                            onClick={logout}
-                                            className="cursor-pointer col-span-2 text-center font-medium text-gray-500 hover:text-gray-700"
+                                            key={item.name}
+                                            onClick={() => openTab(item.name)}
+                                            className="cursor-pointer text-base font-medium text-gray-900 hover:text-gray-500"
                                         >
-                                            Log out
+                                            {item.name}
                                         </a>
-                                    </div>
+                                    ))}
+                                    <a
+                                        onClick={logout}
+                                        className="cursor-pointer col-span-2 text-center font-medium text-gray-500 hover:text-gray-700"
+                                    >
+                                        Log out
+                                    </a>
+                                </div>
                                 </>
                             ) : (
                                 <div>
@@ -250,6 +236,7 @@ export default function NavBar() {
                                     </a>
                                 </div>
                             )}
+
                         </div>
                     </div>
                 </Popover.Panel>

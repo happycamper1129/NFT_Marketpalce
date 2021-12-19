@@ -2,6 +2,7 @@ import React from 'react';
 import {NFT} from "../utils/classes";
 import NftCollectionContainer from "../components/nfts/NftCollectionContainer";
 import NftItem from "../components/nfts/NftItem";
+import TestPart from "../components/TestPart";
 
 const UserNFT = () => {
     const nfts = [
@@ -79,26 +80,7 @@ const UserNFT = () => {
             '1',
             '1',
             'x.near',
-            "Very very very long Cock name",
-            "Fruit cock collection",
-            'token-3',
-            null,
-            'https://media.giphy.com/media/xxBBZgE1XpreXSsNPz/giphy.gif'
-        ),
-        new NFT(
-            '1',
-            '1',
-            'x.near',
-            "Very very very long Cock name",
-            "Fruit cock collection",
-            'token-3',
-            null,
-            'https://media.giphy.com/media/xxBBZgE1XpreXSsNPz/giphy.gif'
-        ), new NFT(
-            '1',
-            '1',
-            'x.near',
-            "Cock name",
+            "Cock",
             "Fruit cock collection",
             'token-3',
             null,
@@ -107,7 +89,8 @@ const UserNFT = () => {
     ]
 
     return (
-        <div className="bg-transparent m-5 sm:m-8">
+        <div className="bg-white m-5 sm:m-8">
+            <TestPart/>
             <NftCollectionContainer>
                 {nfts.map(nft =>
                     <NftItem nft={nft} key={nft.title}/>

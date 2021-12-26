@@ -1,51 +1,100 @@
-import React, {useEffect, useMemo, useState} from 'react';
+import React from 'react';
+import {NFT} from "../utils/classes";
 import NftCollectionContainer from "../components/nfts/NftCollectionContainer";
-import mockNFTs from "../api/__mock__";
-import NftLoading from "../components/ui/loaders/NftLoading";
 import NftItem from "../components/nfts/NftItem";
+import TestPart from "../components/TestPart";
 
 const UserNFT = () => {
-
-    // Uncommnet for mocked variant
-    // const nfts = mockNFTs();
-
-    const [nfts, setNfts] = useState([])
-    const [isLoading, setLoading] = useState(true)
-
-    useEffect(() => {
-
-        setTimeout(() => {
-            setNfts(mockNFTs())
-            setLoading(false)
-        }, 2000)
-    }, [])
-
-
-    // useEffect(() => {
-    //     if (window.walletConnection.isSignedIn()) {
-    //         getNFTs("a77.near").then(myNFTs => {
-    //             for (let nft of myNFTs) {
-    //                 nft.then(
-    //                     resolve => {
-    //                         setNfts(nfts => [...nfts, resolve])
-    //                         setLoading(false)
-    //                     },
-    //                     error => console.log("Error:" + error)
-    //                 )
-    //             }
-    //         })
-    //     }
-    // }, [])
-
-    const loadings = useMemo(() => Array(12).fill(0), [])
+    const nfts = [
+        new NFT('1',
+            '1',
+            'x.near',
+            "Cock#1",
+            "Fruit cock collections",
+            1,
+            null,
+            'https://media.giphy.com/media/xxBBZgE1XpreXSsNPz/giphy.gif'),
+        new NFT('1',
+            '1',
+            'x.near',
+            "Crypto Punk",
+            "Crypto punk collection",
+            4,
+            null,
+            'https://media.giphy.com/media/ho0xXatV7b3Fo1ZRXN/giphy.gif'),
+        new NFT('1',
+            '1',
+            'x.near',
+            "Cock",
+            "Fruit cock collections",
+            4,
+            null,
+            'https://media.giphy.com/media/xxBBZgE1XpreXSsNPz/giphy.gif'
+        ),
+        new NFT(
+            '1',
+            '1',
+            'x.near',
+            "Crypto Punk",
+            "Crypto punk collection",
+            3,
+            null,
+            'https://media.giphy.com/media/ho0xXatV7b3Fo1ZRXN/giphy.gif'),
+        new NFT('1',
+            '1',
+            'x.near',
+            "Cock",
+            "Fruit cock collections",
+            3,
+            null,
+            'https://media.giphy.com/media/xxBBZgE1XpreXSsNPz/giphy.gif'
+        ),
+        new NFT(
+            '1',
+            '1',
+            'x.near',
+            "Crypto Punk",
+            "Crypto punk collection",
+            3,
+            null,
+            'https://media.giphy.com/media/ho0xXatV7b3Fo1ZRXN/giphy.gif'),
+        new NFT(
+            '1',
+            '1',
+            'x.near',
+            "Cock",
+            "Fruit cock collection",
+            3,
+            null,
+            'https://media.giphy.com/media/xxBBZgE1XpreXSsNPz/giphy.gif'),
+        new NFT('1',
+            '1',
+            'x.near',
+            "Crypto Punk",
+            "Crypto punk collection",
+            'token-3',
+            null,
+            'https://media.giphy.com/media/ho0xXatV7b3Fo1ZRXN/giphy.gif'
+        ),
+        new NFT(
+            '1',
+            '1',
+            'x.near',
+            "Cock",
+            "Fruit cock collection",
+            'token-3',
+            null,
+            'https://media.giphy.com/media/xxBBZgE1XpreXSsNPz/giphy.gif'
+        ),
+    ]
 
     return (
-        <div className="bg-transparent m-10">
+        <div className="bg-white m-5 sm:m-8">
+            <TestPart/>
             <NftCollectionContainer>
-                {isLoading
-                    ? loadings.map((i, idx) => <NftLoading key={idx} width={295} height={455}/>)
-                    : nfts.map(nft => <NftItem key={nft.token_id} nft={nft}/>)
-                }
+                {nfts.map(nft =>
+                    <NftItem nft={nft} key={nft.title}/>
+                )}
             </NftCollectionContainer>
         </div>
     );

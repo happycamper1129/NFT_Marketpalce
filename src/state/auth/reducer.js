@@ -1,4 +1,4 @@
-import {LOG_OUT, SIGN_IN} from "./actions";
+import {SET_ACCOUNT_ID, TOGGLE_WALLET_CONNECTION} from "./actions";
 
 const initialState = {
     isWalletConnected: false,
@@ -7,15 +7,15 @@ const initialState = {
 
 export const authReducer = (state = initialState, action) => {
     switch (action.type) {
-        case SIGN_IN:
+        case TOGGLE_WALLET_CONNECTION:
             return {
-                accountId: action.payload,
-                isWalletConnected: true
+                ...state,
+                isWalletConnected: action.payload
             }
-        case LOG_OUT:
+        case SET_ACCOUNT_ID:
             return {
-                accountId: null,
-                isWalletConnected: false
+                ...state,
+                accountId: action.payload
             }
         default:
             return state

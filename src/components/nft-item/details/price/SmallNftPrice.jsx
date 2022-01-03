@@ -1,20 +1,14 @@
 import React from 'react';
 
-import BlackNearIcon from "../../../ui/icons/near/BlackNearIcon";
-import ReactTooltip from "react-tooltip";
+import NearLogo from "./NearLogo";
 
 const SmallNftPrice = ({price, isListed}) => {
     return (
         <div className="flex items-center">
-            <p className="text-price-cyan font-extrabold text-md sm:text-lg">
+            <p className="text-cyan-600 font-extrabold text-md lg:text-lg xl:text-2xl 2xl:text-3xl">
                 {isListed ? price : "Not listed"}
             </p>
-            {isListed &&
-                <div>
-                    <div data-tip='NEAR'><BlackNearIcon/></div>
-                    <ReactTooltip className='text-md text-pink-600' place='bottom' delayShow={100}/>
-                </div>
-            }
+            {isListed && <NearLogo/>}
         </div>
     );
 };

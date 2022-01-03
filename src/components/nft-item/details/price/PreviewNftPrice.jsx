@@ -1,13 +1,13 @@
 import React from 'react';
-import WhiteNearIcon from "../../../ui/icons/near/WhiteNearIcon";
+import NearLogo from "./NearLogo";
 
-const PreviewNftPrice = ({price}) => {
+const PreviewNftPrice = ({price, isListed}) => {
     return (
         <div className="flex items-center">
-            <p className="text-blue-100 font-extrabold text-lg lg:text-2xl">
-                {price}
+            <p className="text-black font-extrabold text-lg lg:text-2xl">
+                {isListed ? price : "NFT not listed on market"}
             </p>
-            <WhiteNearIcon/>
+            {isListed && <NearLogo/>}
         </div>
     );
 };

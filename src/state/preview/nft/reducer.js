@@ -2,16 +2,6 @@ import {BUY_NFT, SELL_NFT, SET_ERROR, SET_FETCHING, SET_NFT, SET_PAYOUTS} from "
 import {login} from "../../../business-logic/near/contract";
 
 
-export const NFT_STATE = Object.freeze(
-    {
-        "SELL": "Sell",
-        "BUY": "Buy",
-        "UNLIST": "Unlist",
-        "CONNECT_WALLET": "Connect wallet",
-        "NOT_LISTED": "Not listed"
-    }
-)
-
 const initialState = {
     nft: null,
     payouts: [],
@@ -20,34 +10,18 @@ const initialState = {
 
     resolveButtonState: (accountId, nft) => {
         if (!accountId) {
-            return {
-                state: NFT_STATE.CONNECT_WALLET,
-                onClick: login
-            }
+            return {text: "Connect Wallet", onClick: login}
         }
         if (nft.isListed() && accountId === nft.ownerId) {
-            return {
-                state: NFT_STATE.UNLIST,
-                onClick: () => alert('unlisted')
-            }
+            return {text: "Unlist", onClick: () => alert('unlisted')}
         }
         if (nft.isListed()) {
-            return {
-                state: NFT_STATE.BUY,
-                onClick: () => alert("buy")
-            }
+            return {text: "Buy", onClick: () => alert("buy")}
         }
         if (accountId === nft.ownerId) {
-            return {
-                text: NFT_STATE.SELL,
-                onClick: () => alert("sell")
-            }
+            return {text: "Sell", onClick: () => alert("sell")}
         }
-        return {
-            state: NFT_STATE.NOT_LISTED,
-            onClick: () => alert('not listed'),
-            disabled: true
-        }
+        return {text: 'Not listed', onClick: () => alert('not listed'), disabled: true}
     }
 }
 

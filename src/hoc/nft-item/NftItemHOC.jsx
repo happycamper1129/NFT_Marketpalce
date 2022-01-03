@@ -3,13 +3,16 @@ import NftItem from "../../components/nft-item/NftItem";
 
 
 const mapStateToProps = (state) => {
-    const nft = state.preview.nft
     return {
-        nft,
-        previewLink: nft ? `nft/${nft.contractId}/${nft.tokenId}` : null,
-        isListed: nft && nft.isListed()
+        nft: state.preview.nft
     }
 }
 
+const mapDispatchToProps = (dispatch) => {
+    return {}
+}
 
-export default connect(mapStateToProps)(NftItem)
+
+const NftItemHOC = connect(mapStateToProps, mapDispatchToProps)(NftItem)
+
+export default NftItemHOC;

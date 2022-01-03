@@ -1,24 +1,8 @@
-import {
-    CHANGE_PROFILE_TAB,
-    ADD_PROFILE_NFT,
-    SET_FETCHING_PROFILE_NFT,
-    SET_HISTORY,
-    SET_MY_NFTS,
-    CLEAR_PROFILE_DATA
-} from "./actions";
-import {combineReducers} from "redux";
-import {profileNftsReducer} from "./my-nfts/reducers";
-import {profileHistoryReducer} from "./history/reducers";
+import {CHANGE_PROFILE_TAB, PUSH_NFT, SET_FETCHING, SET_HISTORY, SET_MY_NFTS} from "./actions";
 
 const MY_NFT_TAB = "My NFT"
 const MY_LISTED_TAB = "My Listed NFT"
 const MY_HISTORY_TAB = "My History"
-
-
-combineReducers({
-    nfts: profileNftsReducer,
-    history: profileHistoryReducer
-})
 
 const initialState = {
     tabs: [
@@ -28,8 +12,8 @@ const initialState = {
     ],
     activeTab: MY_NFT_TAB,
     fetching: false,
-    tags: [],
     nfts: [],
+    tags: [],
     history: []
 }
 
@@ -51,14 +35,13 @@ export const profileReducer = (state = initialState, action) => {
                     }
                 )]
             }
-        case ADD_PROFILE_NFT:
+        case PUSH_NFT:
             return {
                 ...state,
                 nfts: [...state.nfts, action.payload],
-                // TODO: Fix if tab been changed
-                tags: [...state.tags, action.payload]
+                tags: [...state.nfts, action.payload]
             }
-        case SET_FETCHING_PROFILE_NFT:
+        case SET_FETCHING:
             return {
                 ...state,
                 fetching: action.payload
@@ -67,19 +50,12 @@ export const profileReducer = (state = initialState, action) => {
             return {
                 ...state,
                 nfts: action.payload,
+                tags: action.payload
             }
         case SET_HISTORY:
             return {
                 ...state,
                 history: action.payload
-            }
-        case CLEAR_PROFILE_DATA:
-            return {
-                ...state,
-                activeTab: MY_NFT_TAB,
-                nfts: [],
-                tags: [],
-                history: [],
             }
         default:
             return state

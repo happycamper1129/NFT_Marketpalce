@@ -1,14 +1,14 @@
 import React from 'react';
-import MjolHoverBlackButton from "../../../ui/buttons/MjolHoverBlackButton";
+import DarkButton from "../../../ui/buttons/DarkButton";
 import DarkBlueTitle from "../../../ui/text/DarkBlueTitle";
 
 const ProfileNavigationBar = ({onChangeTab, activeTab, tabs}) => {
 
     const navbar = tabs.map(item =>
-        <MjolHoverBlackButton key={item.name}
-                              title={item.name}
-                              isActive={item.name === activeTab}
-                              onClick={() => onChangeTab(item.name)}
+        <DarkButton key={item.name}
+                    title={item.name}
+                    isActive={item.name === activeTab}
+                    onClick={() => onChangeTab(item.name)}
         />)
 
     return (

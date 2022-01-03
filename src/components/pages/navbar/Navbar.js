@@ -6,7 +6,7 @@ import {CloseMenuButton, MenuButton} from "../../ui/navbar/buttons";
 import {Link} from "react-router-dom";
 import {TabsDropDownMenu} from "./menu/TabDropDownMenu";
 import imgLogo from "../../../resources/hammer.png"
-import imgLabel from "../../../resources/label.png"
+import imgLabel from "../../../resources/label6.png"
 
 
 function SmallNavBar({tabs}) {
@@ -68,7 +68,7 @@ export default function Navbar({navbar}) {
                             <div
                                 className={classNames(
                                     name === "Launchpad" || name === "Docs" ? 'cursor-not-allowed' : 'cursor-pointer',
-                                    "text-lg font-extrabold text-cyan-500 hover:text-gray-900"
+                                    "text-lg font-extrabold text-cyan-700 hover:text-gray-900"
                                 )}>
                                 {name}
                             </div>
@@ -82,9 +82,9 @@ export default function Navbar({navbar}) {
                         <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
                             <Link to="/"
                                   onClick={login}
-                                  className="cursor-pointer ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white"
+                                  className="inline-flex justify-center py-1.5 px-4 font-bold text-lg font-large rounded-md text-white bg-gradient-to-br from-light_blue to-green-200 hover:text-gray-900 hover:from-green-200 hover:to-light_blue"
                             >
-                                Sign in
+                                  Sign in
                             </Link>
                         </div>
                     )}
@@ -120,11 +120,11 @@ export default function Navbar({navbar}) {
                             </div>
                         </div>
                         <div key="Explore" className="py-6 px-5 space-y-6">
-                            <div className="text-cyan-500">Explore:</div>
+                            <div className="text-cyan-700">Explore:</div>
                             <SmallNavBar tabs={exploreTabs}/>
                         </div>
                         <div key="Create" className="py-6 px-5 space-y-6">
-                            <div className="text-cyan-500">Create:</div>
+                            <div className="text-cyan-700">Create:</div>
                             <SmallNavBar tabs={createTabs}/>
                         </div>
                         <div className="py-6 px-5 space-y-6">
@@ -152,7 +152,7 @@ export default function Navbar({navbar}) {
                                 <div>
                                     <Link to="/"
                                           onClick={login}
-                                          className="cursor-pointer w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white"
+                                          className="cursor-pointer w-full py-2 flex items-center justify-center font-bold text-lg font-large rounded-md text-white bg-gradient-to-br from-light_blue to-green-200 hover:text-gray-900 hover:from-green-200 hover:to-light_blue"
                                     >
                                         Sign in
                                     </Link>

@@ -134,7 +134,11 @@ const CreateNftPage = () => {
                 <RoundLoader/>
             ) : (
                 <div className="bg-light_white">
-                    <DarkBlueTitle title="Create NFT"/>
+                    <div
+                        className="pb-2 py-5 text-3xl text-center font-extrabold text-transparent bg-clip-text
+                           md:text-6xl bg-gradient-to-br from-green-900 to-light_blue">
+                        Create NFT
+                    </div>
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 h-screen">
                         <form onSubmit={submitForm}>
                             <div className="shadow rounded-md overflow-hidden">
@@ -218,7 +222,7 @@ const CreateNftPage = () => {
                                 <div className="px-4 py-3 bg-gray-50 text-left sm:px-6">
                                     <button
                                         type="submit"
-                                        className="inline-flex justify-center py-2 px-6 font-bold text-lg hover:text-gray-900 font-large rounded-md text-white bg-gradient-to-br from-light_blue to-green-200  hover:from-green-200 hover:to-light_blue"
+                                        className="inline-flex justify-center py-2 px-6 font-bold text-lg hover:text-gray-900 font-large rounded-md text-white bg-gradient-to-br from-light_blue to-green-200"
                                     >
                                         Mint
                                     </button>

@@ -1,8 +1,24 @@
 import {NFT} from "../models/NFT";
 import {MintSite} from "../models/MintSite";
-import {NftAPI} from "./get-utils";
 
 const isIPFS = require('is-ipfs');
+
+
+export async function getJsonByURL(url) {
+    try {
+        const response = await fetch(url, {timeout: 30000});
+        if (!response.ok) {
+            return {error: response.statusText + ' (' + response.status + ')'}
+        }
+        try {
+            return await response.json();
+        } catch (err) {
+            return {error: 'Unable to parse NFT json response'}
+        }
+    } catch (error) {
+        return {error}
+    }
+}
 
 
 function getRealUrl(url, urlHash, contractId) {
@@ -49,7 +65,7 @@ function getNftMintedSiteInfo(nft, contractId) {
     if (contractId.endsWith('mjol.near')) {
         return new MintSite(
             'MjolNear',
-            `https://mjolnear.com/nft/${contractId}/${nft.token_id}`
+            `https://mjolnear.com/collections/${contractId}/${nft.token_id}`
         )
     }
     return null;
@@ -75,7 +91,7 @@ function getNftMintedSiteInfo(nft, contractId) {
 //   reference_hash: null
 // },
 // approved_account_ids: {}
-function convertStandardNFT(contractId, nft, listedNftKeys) {
+export function convertStandardNFT(contractId, nft, listedNftKeys) {
     const metadata = nft.metadata;
     return new NFT(
         contractId,
@@ -148,7 +164,7 @@ function convertStandardNFT(contractId, nft, listedNftKeys) {
 // store: 'nuniversity.mintbase1.near',
 // external_url: 'https://near.university/',
 // type: 'NEP171'
-async function getMintbaseNFT(account, contractId, nft, listedNftKeys) {
+export async function getMintbaseNFT(account, contractId, nft, listedNftKeys) {
     const metadata = nft.metadata;
     const url = await account.viewFunction(
         contractId,
@@ -157,10 +173,10 @@ async function getMintbaseNFT(account, contractId, nft, listedNftKeys) {
             token_id: nft.id.toString()
         }
     )
-    const jsonNFT = await NftAPI.getJsonByURL(url)
+    const jsonNFT = await getJsonByURL(url)
     return new NFT(
         contractId,
-        nft.id.toString(),
+        nft.id,
         nft.owner_id.Account,
         jsonNFT.title,
         jsonNFT.description,
@@ -172,11 +188,4 @@ async function getMintbaseNFT(account, contractId, nft, listedNftKeys) {
             ? null
             : listedNftKeys[contractId + ':' + nft.id]
     )
-}
-
-export async function getConvertedNFT(account, contractId, nft, listedNftKeys) {
-    if (contractId.endsWith('mintbase1.near')) {
-        return getMintbaseNFT(account, contractId, nft, listedNftKeys)
-    }
-    return convertStandardNFT(contractId, nft, listedNftKeys)
 }

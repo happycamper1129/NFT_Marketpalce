@@ -5,8 +5,7 @@ import Buffer from 'buffer'
 const nearConfig = getConfig('mainnet');
 
 
-export const GAS = "300000000000000";
-export const SM_DEPOSIT = utils.format.parseNearAmount('0.1');
+const GAS = "300000000000000";
 
 // Initialize contract & set global variables
 export async function initContract() {
@@ -51,29 +50,23 @@ export function login() {
         .catch(e => console.log("error" + e))
 }
 
-export function giveApprove(nft, price) {
-    const price_formatted = utils.format.parseNearAmount(price.toString());
-    window.walletConnection.account().functionCall(
-        nft.contractId,
-        'nft_approve',
-        {
-            token_id: nft.tokenId,
-            account_id: nearConfig.contractName,
-            msg: `{\"price\":\"${price_formatted}\"}`
-        },
-        GAS,
-        SM_DEPOSIT
-    )
-}
+export function mintToCommonCollection(token_metadata, payout) {
+    const common_contract_id = 'mjol.near';
+    const token_id = 'token-' + new Date().getTime();
 
-export function buyNftWithPayouts(nft) {
-    const price_formatted = utils.format.parseNearAmount(nft.price.toString());
-    window.contract.buy_with_payouts(
-        {
-            nft_contract_id: nft.contractId,
-            token_id: nft.tokenId
-        },
+    const data = {
+        token_id: token_id,
+        token_owner_id: window.accountId,
+        token_metadata: token_metadata,
+    };
+    if (payout !== null) {
+        data["payout"] = payout
+    }
+    window.walletConnection.account().functionCall(
+        common_contract_id,
+        'nft_mint',
+        data,
         GAS,
-        price_formatted
+        utils.format.parseNearAmount('0.1')
     )
 }

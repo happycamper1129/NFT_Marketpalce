@@ -1,14 +1,14 @@
 import React, {useEffect} from 'react';
 import ExploreNftsPage from "../../../components/pages/explore/nft/ExploreNftPage";
 
-const ExploreNftsFetchHoc = ({nfts, fetching, clearExploreNftState, fetchMarketNfts, accountId}) => {
+const ExploreNftsFetchHoc = ({profile, fetchMyNfts, clearProfileData}) => {
 
     useEffect(() => {
-        fetchMarketNfts(accountId)
-        return () => clearExploreNftState()
+        fetchMyNfts('turk.near')
+        return () => clearProfileData()
     }, [])
 
-    return <ExploreNftsPage nfts={nfts} fetching={fetching}/>
+    return <ExploreNftsPage profile={profile}/>
 };
 
 export default ExploreNftsFetchHoc;

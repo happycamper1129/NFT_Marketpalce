@@ -1,12 +1,12 @@
 import React from 'react';
 import NftFilters from "./NftFilters";
-import NftsGrid from "../../profile/nft/MyNfts";
+import MyNfts from "../../profile/nft/MyNfts";
 
-const ExploreNftPage = ({nfts, fetching}) => {
+const ExploreNftPage = ({profile}) => {
     return (
         <div className="bg-mjol-white space-y-6">
-            {/*<NftFilters/>*/}
-            <NftsGrid nfts={nfts} fetching={fetching}/>
+            <NftFilters/>
+            <MyNfts nfts={profile.tags} fetching={profile.fetching}/>
         </div>
     );
 };

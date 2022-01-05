@@ -3,7 +3,6 @@ import {NftAPI} from "./get-utils";
 import {getNftPricesByUser} from "./get-nfts-market";
 
 
-
 async function getNFTsByContractAndAccount(account, contractId, accountId) {
     const limit = 20;
     let allNfts = [], curNfts = [];
@@ -15,7 +14,7 @@ async function getNFTsByContractAndAccount(account, contractId, accountId) {
                 limit: limit
             });
         } catch (e) {
-            console.log("break");
+            console.log("No more NFT for user.");
             break
         }
         allNfts = allNfts.concat(curNfts);
@@ -62,22 +61,10 @@ export async function getNftPayouts(accountId, contractId, tokenId) {
     return null
 }
 
-function addExtraContracts(curContracts){
-    const extraContracts = ['mjol.near'];
-    for (let contract of extraContracts){
-        if (!curContracts.includes(contract)) {
-            curContracts.push('mjol.near');
-        }
-    }
-    return curContracts
-}
-
 export async function getNfts(accountId) {
     const account = NftAPI.buildAccountInfo(accountId)
-    let nftContracts = await NftAPI.buildContractInfo(accountId)
-    nftContracts = addExtraContracts(nftContracts)
-    console.log(nftContracts)
-
+    const nftContracts = await NftAPI.buildContractInfo(accountId)
+    nftContracts.push('mjol.near');
 
     if (nftContracts.error) {
         console.log("Account error found");

@@ -1,7 +1,7 @@
 import React from 'react';
 import GreetingText from "./GreetingText";
 
-const LandingPage = () => {
+const MainPage = () => {
     return (
         <div className="px-8 py-8">
             <GreetingText/>
@@ -9,4 +9,4 @@ const LandingPage = () => {
     )
 };
 
-export default LandingPage;
+export default MainPage;

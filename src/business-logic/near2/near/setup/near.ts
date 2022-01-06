@@ -15,9 +15,9 @@ export const wallet = new WalletConnection(near, config.contractName)
 // Initializing our setup APIs by setup name and configuration
 export const contract = new Contract(wallet.account(), config.contractName, {
     // View methods are read only. They don't modify the state, but usually return some value.
-    viewMethods: ['get_nfts', 'get_user_nfts', 'get_nft_price'],
+    viewMethods: [],
     // Change methods can modify the state. But you don't receive the returned value when called.
-    changeMethods: ['buy_with_payouts', 'remove_from_market'],
+    changeMethods: ['buy_with_payouts'],
 })
 
 export const getAccountId = () => {

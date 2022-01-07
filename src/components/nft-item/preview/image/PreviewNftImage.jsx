@@ -2,10 +2,10 @@ import React from 'react';
 
 const PreviewNftImage = ({link}) => {
     return (
-        <div className="justify-self-center md:justify-self-end">
+        <div className="justify-self-center md:justify-self-end w-full">
             <img src={link}
-                 alt="loading..."
-                 className="rounded-3xl max-h-xl"
+                 alt="media not supported"
+                 className="w-full max-h-xl object-contain"
             />
         </div>
     );

@@ -39,19 +39,23 @@ export async function getNftPayouts(accountId, contractId, tokenId) {
     try {
         return account.viewFunction(contractId, 'nft_payout', {
             token_id: tokenId,
-            balance: '10000',
+            balance: '100000000',
             max_len_payout: 10
         }).then(payouts => {
             let royalties = {'treasury': TREASURY_PERCENT};
             let highestPayout = null;
             for (let payoutKey in payouts['payout']) {
-                const payoutVal = parseInt(payouts['payout'][payoutKey]) / 100;
+                const payoutVal = parseInt(payouts['payout'][payoutKey]) / 1000000;
                 if (!highestPayout || highestPayout[1] < payoutVal) {
                     highestPayout = [payoutKey, payoutVal]
                 }
                 royalties[payoutKey] = payoutVal
             }
             delete royalties[highestPayout[0]]
+            if (royalties['undefined'] !== undefined){
+                royalties[highestPayout[0]] = royalties['undefined']
+                delete royalties['undefined']
+            }
 
             return royalties
         })
@@ -61,9 +65,9 @@ export async function getNftPayouts(accountId, contractId, tokenId) {
     return null
 }
 
-function addExtraContracts(curContracts) {
+function addExtraContracts(curContracts){
     const extraContracts = ['mjol.near'];
-    for (let contract of extraContracts) {
+    for (let contract of extraContracts){
         if (!curContracts.includes(contract)) {
             curContracts.push('mjol.near');
         }
@@ -84,14 +88,12 @@ export async function getNfts(accountId) {
         return []
     }
     const listedNftKeys = await getNftPricesByUser(accountId);
-    console.log(listedNftKeys)
     let resNFTs = [];
     for (let contractId of nftContracts) {
         const nfts = await getNFTsByContractAndAccount(account, contractId, accountId);
         for (let nft of nfts) {
             const nftInfoPromise = getConvertedNFT(account, contractId, nft, listedNftKeys)
             resNFTs.push(nftInfoPromise)
-            break
         }
     }
 

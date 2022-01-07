@@ -1,6 +1,5 @@
 import React from 'react';
 import classNames from "../../../utils/css-utils";
-import DarkBlueMjolText from "../text/DarkBlueMjolText";
 
 const MjolBlueGradientButton = ({title, onClick, isActive = true}) => {
 
@@ -14,11 +13,13 @@ const MjolBlueGradientButton = ({title, onClick, isActive = true}) => {
                     )
                 }
         >
-            <div>
-                {isActive
-                    ? <div className="text-white font-extrabold">{title}</div>
-                    : <DarkBlueMjolText text={title}/>
-                }
+            <div className={classNames(!isActive
+                    ? ""
+                    : "text-white",
+                "text-center font-extrabold text-transparent bg-clip-text bg-gradient-to-bl from-blue-500 to-blue-800"
+            )
+            }>
+                {title}
             </div>
         </button>
     );

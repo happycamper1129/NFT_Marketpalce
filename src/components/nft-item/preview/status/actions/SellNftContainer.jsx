@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
+import withPriceContainer from "./withPriceContainer";
+import MjolGreenBlueButton from "../../../../ui/buttons/MjolGreenBlueButton";
 import InputPriceModal from "../../../../ui/modal/InputPriceModal";
-import DarkBlueGradientButton from "../../../../ui/buttons/DarkBlueGradientButton";
 
 const SellNftContainer = ({onClick}) => {
 
@@ -8,7 +9,9 @@ const SellNftContainer = ({onClick}) => {
 
     return (
         <div>
-            <DarkBlueGradientButton title="Sell NFT" onClick={() => setVisible(true)}/>
+            <MjolGreenBlueButton onClick={() => setVisible(true)}>
+                Sell NFT
+            </MjolGreenBlueButton>
             <InputPriceModal hidden={!visible} setVisible={setVisible} onClick={onClick}/>
         </div>
     );

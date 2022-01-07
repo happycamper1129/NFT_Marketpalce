@@ -2,16 +2,19 @@ import React from 'react';
 import PreviewAttribute from "./PreviewAttribute";
 
 const PreviewAttributes = ({attributes}) => {
+
+    if (attributes.length === 0) {
+        return <div>Not found</div>
+    }
+
     return (
         <div>
-            {attributes.length === 0
-                ? <div>Not found</div>
-                : attributes.map(attribute =>
-                    <PreviewAttribute key={attribute.name}
-                                      name={attribute.name}
-                                      value={attribute.value}
-                    />
-                )}
+            {attributes.map(attribute =>
+                <PreviewAttribute key={attribute.name}
+                                  name={attribute.name}
+                                  value={attribute.value}
+                />
+            )}
         </div>
     );
 };

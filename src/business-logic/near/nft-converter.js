@@ -39,19 +39,19 @@ function getNftMintedSiteInfo(nft, contractId) {
         )
 
     }
-    // if (contractId === 'pluminite.near') {
-    //     return new MintSite(
-    //         'Pluminite',
-    //         `https://pluminite.com/#/gem/${nft.token_id}`
-    //     )
-    // }
+    if (contractId === 'pluminite.near') {
+        return new MintSite(
+            'Pluminite',
+            `https://pluminite.com/#/gem/${nft.token_id}`
+        )
+    }
     if (contractId.endsWith('mjol.near')) {
         return new MintSite(
             'MjolNear',
             `https://mjolnear.com/nft/${contractId}/${nft.token_id}`
         )
     }
-    return new MintSite('Non-verified contract', '');
+    return null;
 }
 
 
@@ -76,18 +76,14 @@ function getNftMintedSiteInfo(nft, contractId) {
 // approved_account_ids: {}
 function convertStandardNFT(contractId, nft, listedNftKeys) {
     const metadata = nft.metadata;
-    const mediaUrl =  getRealUrl(metadata.media, metadata.media_hash, contractId);
-    if (!mediaUrl){
-        return null
-    }
     return new NFT(
         contractId,
-        nft.token_id || nft.id,
+        nft.token_id,
         nft.owner_id,
         metadata.title,
         metadata.description,
         metadata.copies,
-        mediaUrl,
+        getRealUrl(metadata.media, metadata.media_hash, contractId),
         getRealUrl(metadata.reference, metadata.reference_hash, contractId),
         getNftMintedSiteInfo(nft, contractId),
         listedNftKeys[contractId + ':' + nft.token_id] === undefined
@@ -161,10 +157,6 @@ async function getMintbaseNFT(account, contractId, nft, listedNftKeys) {
         }
     )
     const jsonNFT = await NftAPI.getJsonByURL(url)
-    const mediaUrl = getRealUrl(jsonNFT.media, jsonNFT.media_hash, contractId)
-    if (!mediaUrl){
-        return null
-    }
     return new NFT(
         contractId,
         nft.id.toString(),
@@ -172,7 +164,7 @@ async function getMintbaseNFT(account, contractId, nft, listedNftKeys) {
         jsonNFT.title,
         jsonNFT.description,
         metadata.copies,
-        mediaUrl,
+        getRealUrl(jsonNFT.media, jsonNFT.media_hash, contractId),
         getRealUrl(nft.metadata.reference, nft.metadata.reference_hash, contractId),
         getNftMintedSiteInfo(nft, contractId),
         listedNftKeys[contractId + ':' + nft.id] === undefined

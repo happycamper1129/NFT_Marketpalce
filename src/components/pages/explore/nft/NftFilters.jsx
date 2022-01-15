@@ -1,8 +1,8 @@
 import React from 'react';
-import BlueShadowContainer from "../../../ui/shadow/BlueShadowContainer";
-import DarkBlueTitle from "../../../ui/text/DarkBlueTitle";
-import SearchInput from "../../../filters/search/SearchInput";
-import ToggleFilter from "../../../filters/toggle/ToggleFilter";
+import BlueShadowContainer from "../../../Common/shadow/BlueShadowContainer";
+import DarkBlueTitle from "../../../Common/text/DarkBlueTitle";
+import SearchInput from "../../../Filter/search/SearchInput";
+import ToggleFilter from "../../../Filter/toggle/ToggleFilter";
 
 const NftFilters = () => {
     return (

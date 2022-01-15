@@ -1,7 +1,7 @@
 import React, {Fragment} from 'react'
 import {Popover, Transition} from '@headlessui/react'
 import classNames from "../../../utils/css-utils";
-import {CloseMenuButton, MenuButton} from "../../ui/navbar/buttons";
+import {CloseMenuButton, MenuButton} from "../../Common/navbar/buttons";
 import {Link} from "react-router-dom";
 import {TabsDropDownMenu} from "./menu/TabDropDownMenu";
 import imgLogo from "../../../resources/hammer.png"

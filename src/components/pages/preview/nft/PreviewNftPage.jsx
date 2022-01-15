@@ -1,7 +1,7 @@
 import React from 'react';
 
-import PreviewNftImage from "../../../nft-item/preview/image/PreviewNftImage";
-import NftPreviewInfo from "../../../nft-item/preview/details/NftPreviewInfo";
+import PreviewNftImage from "../../../Preview/PreviewNftImage";
+import NftPreviewInfo from "../../../Preview/Blocks/NftPreviewInfo";
 
 const PreviewNftPage = ({nft, payouts, statusElement}) => {
     return (

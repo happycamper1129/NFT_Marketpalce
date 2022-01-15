@@ -1,6 +1,6 @@
 import React from 'react';
 import NftFilters from "./NftFilters";
-import NftsGrid from "../../../nft-collection/NftsGrid";
+import NftsGrid from "../../../Collection/NftsGrid";
 
 const ExploreNftPage = ({nfts, fetching}) => {
     return (

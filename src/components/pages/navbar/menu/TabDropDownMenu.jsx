@@ -1,5 +1,5 @@
 import {Popover, Transition} from "@headlessui/react";
-import {DropDownButton} from "../../../ui/navbar/buttons";
+import {DropDownButton} from "../../../Common/navbar/buttons";
 import React, {Fragment} from "react";
 import classNames from "../../../../utils/css-utils";
 import {Link} from "react-router-dom";

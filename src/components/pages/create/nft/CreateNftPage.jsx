@@ -6,9 +6,9 @@ import OptionInputContainer from "./upload/containers/OptionInputContainer";
 import PropertyInput from "./upload/lines/PropertyInput";
 import UploadFileInput from "./upload/UploadFileInput";
 import {makeNftLink, storeNFT} from "../../../../business-logic/ipfs/upload";
-import DarkBlueTitle from "../../../ui/text/DarkBlueTitle";
-import RoundLoader from "../../../ui/loaders/RoundLoader";
-import BlueShadowContainer from "../../../ui/shadow/BlueShadowContainer";
+import DarkBlueTitle from "../../../Common/text/DarkBlueTitle";
+import RoundLoader from "../../../Common/loaders/RoundLoader";
+import BlueShadowContainer from "../../../Common/shadow/BlueShadowContainer";
 import {getAccountId, wallet} from "../../../../business-logic/near/enviroment/near";
 
 
@@ -171,7 +171,7 @@ const CreateNftPage = () => {
                                                          id={'mint-royalty'}
                                                          setState={setRoyalty}
                                     />
-                                    <OptionInputContainer name={'Collection'}
+                                    <OptionInputContainer name={'NftCollection'}
                                                           myCollections={myCollections}
                                                           id={'mint-collection'}
                                                           curCollection={curCollection}

@@ -1,6 +1,6 @@
 import React from 'react';
 import {signIn} from "../../../business-logic/near/enviroment/near";
-import MjolGreenBlueButton from "../../ui/buttons/MjolGreenBlueButton";
+import MjolGreenBlueButton from "../../Common/buttons/MjolGreenBlueButton";
 
 const WalletConnectionPage = () => {
     return (

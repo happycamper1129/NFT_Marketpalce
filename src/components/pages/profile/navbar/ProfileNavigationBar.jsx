@@ -1,7 +1,7 @@
 import React from 'react';
-import MjolBlueGradientButton from "../../../ui/buttons/MjolBlueGradientButton";
-import DarkBlueTitle from "../../../ui/text/DarkBlueTitle";
-import BlueShadowContainer from "../../../ui/shadow/BlueShadowContainer";
+import MjolBlueGradientButton from "../../../Common/buttons/MjolBlueGradientButton";
+import DarkBlueTitle from "../../../Common/text/DarkBlueTitle";
+import BlueShadowContainer from "../../../Common/shadow/BlueShadowContainer";
 
 const ProfileNavigationBar = React.memo(({onTabChange, activeTab, tabs}) => {
 

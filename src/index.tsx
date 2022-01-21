@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom'
 
 import {BrowserRouter, HashRouter} from "react-router-dom";
 import {Provider} from "react-redux";
-import App from "./App";
+import App from "./launch/App";
 import {setupStore} from "./state/store";
 
 const store = setupStore()

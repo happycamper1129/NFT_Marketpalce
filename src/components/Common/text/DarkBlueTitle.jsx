@@ -1,6 +1,6 @@
 import React from 'react';
 
-const DarkBlueTitle = ({title, classes = undefined}) => {
+const DarkBlueTitle = ({title, classes}) => {
     return (
         <div
             className={

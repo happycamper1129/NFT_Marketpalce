@@ -3,7 +3,7 @@ import {Nft} from "../../../business-logic/models/nft";
 import {MarketPage} from "../../../business-logic/near/api/market/get-nfts-market";
 
 export interface ExploreNftsState {
-    nfts: Nft[],
+    nfts: Array<Nft>,
     fetching: boolean,
     from: number,
     limit: number,

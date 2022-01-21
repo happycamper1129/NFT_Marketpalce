@@ -1,5 +1,6 @@
 import React from 'react';
 import PreviewNftPrice from "../Blocks/PreviewNftPrice";
+// import PreviewNftPrice from "../../../Small/Blocks/";
 
 const withPriceContainer = (Component) => ({price, ...props}) => {
     return (

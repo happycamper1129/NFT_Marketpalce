@@ -7,9 +7,6 @@ export type ContractId = string
 // string alias for token
 export type TokenId = string
 
-// string alias for collection
-export type CollectionId = string
-
 // string alias for NEAR amount
 export type StringAmount = string
 

@@ -19,17 +19,11 @@ export function mintToCommonCollection(tokenMetadata, payout, collectionId) {
     )
 }
 
-
-export function createCollection(collectionMetadata, methodName) {
-    let args = {
-        metadata: collectionMetadata,
-    };
-    if (methodName === 'add_collection') {
-        args.owner_id = collectionMetadata.contract
-    }
-
+export function createCollection(metadata) {
     return mjolFunctionCall({
-        methodName: methodName,
-        args
+        methodName: 'create_collection',
+        args: {
+            metadata
+        },
     })
 }

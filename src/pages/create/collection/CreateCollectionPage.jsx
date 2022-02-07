@@ -32,9 +32,6 @@ const LineAlert = ({state, setState}) => {
 };
 
 const CreateCollectionPage = () => {
-    const METHOD = 'create_collection';//'add_collection';
-    const CONTRACT = 'mjol.near';
-
     const MIN_TITLE_LEN = 3;
     const MAX_TITLE_LEN = 30;
     const MAX_DESC_LEN = 250;
@@ -169,12 +166,11 @@ const CreateCollectionPage = () => {
         const ipfsRef = makeNftLink(res.url);
         const collectionMetadata = {
             title: title,
-            contract: CONTRACT,
             desc: description,
             media: ipfsMedia,
             reference: ipfsRef
         }
-        createCollection(collectionMetadata, METHOD).finally(() =>
+        createCollection(collectionMetadata).finally(() =>
             setIsLoading(false)
         )
     }

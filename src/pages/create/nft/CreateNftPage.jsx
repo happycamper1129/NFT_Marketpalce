@@ -12,7 +12,6 @@ import {getAccountId, wallet} from "../../../business-logic/near/enviroment/near
 import {getTraitsFromCollectionsLinks} from "../../../business-logic/near/api/collections/get-collections-traits";
 import OptionInput from "./upload/lines/OptionInput";
 import {collectionAPI} from "../../../business-logic/near/api/collections";
-import CreateLoader from "../../../components/Common/Loaders/CreateLoader";
 
 
 const LineAlert = ({state, setState}) => {
@@ -51,7 +50,6 @@ const CreateNftPage = () => {
     const [description, setDescription] = useState('');
     const [royalty, setRoyalty] = useState(0);
     const [file, setFile] = useState(null);
-    const [copies, setCopies] = useState(1);
     const [isLoading, setIsLoading] = useState(false);
     const [alertText, setAlertText] = useState("");
 
@@ -71,8 +69,9 @@ const CreateNftPage = () => {
     }, []);
 
     useEffect(() => {
+        console.log("CUR")
+        console.log(curCollection)
         setNftTraits([])
-        setCopies(1)
     }, [curCollection])
 
 
@@ -80,7 +79,7 @@ const CreateNftPage = () => {
         let traits = {}
         for (let dictWithOneKey of nftTraits) {
             let tmpKey = Object.keys(dictWithOneKey)[0];
-            if (dictWithOneKey[tmpKey] === 'None') {
+            if (dictWithOneKey[tmpKey] === 'None'){
                 delete traits[tmpKey]
             } else {
                 traits[tmpKey] = dictWithOneKey[tmpKey]
@@ -125,7 +124,7 @@ const CreateNftPage = () => {
                 description: description,
                 media: ipfsMedia,
                 reference: ipfsRef,
-                copies: Number(copies)
+                copies: 1
             };
             let payout = null;
             if (royalty !== 0) {
@@ -135,24 +134,23 @@ const CreateNftPage = () => {
                 payout["payout"][getAccountId()] = (100 * royalty).toString();
             }
             let collectionId = curCollection === 'None' ? null : curCollection;
-            mintToCommonCollection(token_metadata, payout, collectionId).finally(
-                setTimeout(() => {
-                    setIsLoading(false)
-                }, 2000)
-            );
+            mintToCommonCollection(token_metadata, payout, collectionId);
+            setIsLoading(false);
         }).catch((e) => {
                 setAlertText(`Error: Can't upload file to ipfs, try again or contact to our support`);
                 setIsLoading(false);
                 console.log(e);
             }
         )
+
+
     };
 
 
     return (
         <>
             {isLoading ? (
-                <CreateLoader/>
+                <MjolLoader size={50}/>
             ) : (
                 <div className="bg-mjol-white">
                     <div className="bg-white">
@@ -218,20 +216,6 @@ const CreateNftPage = () => {
                                         </div>
 
                                     ) : (
-                                        <></>
-                                    )}
-                                    {curCollection === 'None' ? (
-                                        <div>
-                                            <label
-                                                className="block font-bold text-sm text-gray-700">Copies: {copies}</label>
-                                            <div className="grid grid-cols-3 gap-6">
-                                                <div className="sm:col-span-1 col-span-3">
-                                                    <input type="range" min="1" name="copies" max="20" defaultValue="1"
-                                                           className="w-full h-2 bg-blue-100 appearance-none rounded"
-                                                           onChange={(e) => setCopies(e.target.value)}/>
-                                                </div>
-                                            </div>
-                                        </div>) : (
                                         <></>
                                     )}
                                     <UploadFileInput text="Upload artwork file"

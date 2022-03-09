@@ -4,25 +4,19 @@ import nftsImg from "../../resources/nfts_main2.png";
 import CardGrid from "../../components/CardList/CardGrid";
 import DarkBlueTitle from "../../components/Common/Text/DarkBlueTitle";
 import {convertToEntity} from "../../graphql/utils";
-import {useLastMarketTokensQuery, useMarketTokensQuery} from "../../graphql/generated/graphql";
+import {useLastMarketTokensQuery} from "../../graphql/generated/graphql";
 import {tokenSortOptions, TokenSortName} from "../explore/nft/ExploreNftsPage";
-import {MAX_ITEM_YOCTO_PRICE, MIN_ITEM_YOCTO_PRICE} from "../../utils/string";
 
 const LandingPage = () => {
     const initialSort = tokenSortOptions[TokenSortName.RecentlyAdded]
-    const {data, loading, fetchMore} = useMarketTokensQuery({
-        fetchPolicy: "network-only",
-        nextFetchPolicy: "network-only",
+    const {data, loading, fetchMore} = useLastMarketTokensQuery({
         variables: {
-            offset: 0,
-            limit: 12,
+            skip: 0,
+            first: 12,
             orderBy: initialSort.by,
             orderDirection: initialSort.direction,
-            priceFrom: MIN_ITEM_YOCTO_PRICE,
-            priceTo: MAX_ITEM_YOCTO_PRICE
         }
     })
-
     const nfts = data?.marketTokens.map(convertToEntity) || [];
     return (
         <div className="max-w-screen-2xl mx-auto">

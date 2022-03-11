@@ -51,10 +51,10 @@ export async function getNftPayouts(contractId: string, tokenId: string): Promis
 }
 
 function addExtraContracts(curContracts: string[]) {
-    const extraContracts = ['mjol.near', 'x.paras.near'];
+    const extraContracts = ['mjol.near'];
     for (let contract of extraContracts) {
         if (!curContracts.includes(contract)) {
-            curContracts.push(contract);
+            curContracts.push('mjol.near');
         }
     }
     return curContracts

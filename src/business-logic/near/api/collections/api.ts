@@ -1,5 +1,5 @@
 import {AccountId, CollectionId, ContractId, Optional} from "../../../models/types";
-import {mjolViewFunction, viewFunction} from "../rpc";
+import {mjolViewFunction, viewFunction} from "../../enviroment/rpc";
 import {
     CollectionsBatchResponse,
     CollectionTokensResponse,
@@ -12,7 +12,7 @@ import {MJOL_CONTRACT_ID} from "../../enviroment/contract-names";
 import {emptyTokensBatchResponse} from "../types/response/core";
 import {batchRequest} from "../batch-request";
 import {nftAPI} from "../nfts";
-import {DODIK_GET_LIST, WhitelistedContract} from "../../../whitelisted.contract";
+import {WhitelistedContract} from "../../../whitelisted.contract";
 
 export const collectionAPI = {
 
@@ -81,7 +81,7 @@ export const collectionAPI = {
     },
 
     fetchWhitelistedCollectionNfts: (contractId: ContractId, from: number, limit: number): Promise<NearToken[]> => {
-        if (DODIK_GET_LIST.has(contractId)) {
+        if (contractId === WhitelistedContract.NearPunks) {
             let indices = []
             for (let i = 1; i <= limit; i++) {
                 indices.push(from + i)
@@ -160,13 +160,13 @@ export const collectionAPI = {
             return null
         }),
 
-    fetchCollections: (from: number, limit: number): Promise<CollectionsBatchResponse> =>
+    fetchCollections: (from: number, limit: number, includeEmpty: boolean = false): Promise<CollectionsBatchResponse> =>
         mjolViewFunction<CollectionsBatchResponse>({
                 methodName: 'get_collections',
                 args: {
                     from,
                     limit,
-                    include_empty: false
+                    include_empty: includeEmpty
                 }
             }
         ).catch(e => {

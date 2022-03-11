@@ -1,6 +1,9 @@
 import React from 'react';
+import NearWithText from "../../Icons/near/NearWithText";
+import walletBackground from '../../../resources/near-wallet.png'
+import WhiteNearIcon from "../../Icons/near/WhiteNearIcon";
 import NearIcon from "../../Icons/near/NearIcon";
-import {getCurrentWallet} from "../../../business-logic/near/wallet/wallet";
+import {signIn} from "../../../business-logic/near/enviroment/near";
 
 
 const NearConnectButton = () => {
@@ -8,7 +11,7 @@ const NearConnectButton = () => {
         <button
             className="bg-black font-bold inline-flex items-center rounded-3xl px-3 py-2
                        hover:bg-opacity-90 hover:shadow-mjol-gray-xs w-[300px]"
-            onClick={() => getCurrentWallet().requestSignIn()}
+            onClick={signIn}
         >
             <div className="justify-self-start">
                 <NearIcon size={32} fill="white"/>

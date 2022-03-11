@@ -4,13 +4,13 @@ import BlueShadowContainer from "../../../components/Common/Shadow/BlueShadowCon
 import SingleLineContainer from "../nft/upload/containers/SingleLineContainer";
 import MultiLineContainer from "../nft/upload/containers/MultiLineContainer";
 import UploadFileInput from "../nft/upload/UploadFileInput";
+import {wallet} from "../../../business-logic/near/enviroment/near";
 import {makeNftLink, storeCollection} from "../../../business-logic/ipfs/upload";
 import {createCollection} from "../../../business-logic/near/api/nfts/mint";
 import classNames from "../../../utils/css-utils";
 import PropertyInput from "../nft/upload/lines/PropertyInput";
 import CreateLoader from "../../../components/Common/Loaders/CreateLoader";
 import withAuthRedirect from "../../../hoc/withAuthRedirect";
-import {getCurrentWallet} from "../../../business-logic/near/wallet/wallet";
 
 const LineAlert = ({state, setState}) => {
     return (
@@ -33,7 +33,7 @@ const LineAlert = ({state, setState}) => {
 };
 
 const CreateCollectionPage = () => {
-    const METHOD = 'create_collection';//'add_collection';
+    const METHOD = 'create_collection';//'add_collection'; 'create_collection';
     const CONTRACT = 'mjol.near';
 
     const MIN_TITLE_LEN = 3;
@@ -99,7 +99,7 @@ const CreateCollectionPage = () => {
         e.preventDefault();
 
         setAlertText("");
-        if (!getCurrentWallet().isSignedIn()) {
+        if (!wallet.isSignedIn()) {
             return
         }
         if (!(title.length <= MAX_TITLE_LEN && title.length >= MIN_TITLE_LEN)) {
@@ -159,7 +159,9 @@ const CreateCollectionPage = () => {
             setIsLoading(true);
             storeCollection(title, description, fileIcon, fileBanner, fileTraits).then(res => {
                 prepareCollection(res);
-                setIsLoading(false);
+                setTimeout(() => {
+                    setIsLoading(false)
+                }, 2000)
             })
         }
     }
@@ -176,7 +178,9 @@ const CreateCollectionPage = () => {
             reference: ipfsRef
         }
         createCollection(collectionMetadata, METHOD).finally(() =>
-            setIsLoading(false)
+            setTimeout(() => {
+                setIsLoading(false)
+            }, 2000)
         )
     }
 

@@ -1,8 +1,12 @@
 import React from 'react';
+import DarkBlueGradientButton from "../../components/Common/Buttons/DarkBlueGradientButton";
+import NearConnectButton from "../../components/Common/Buttons/NearConnectButton";
+import DropDownMjolBlueButton from "../../components/Common/Buttons/DropDownMjolBlueButton";
 import {Link} from "react-router-dom";
+import {signIn} from "../../business-logic/near/enviroment/near";
 
 
-const BlueGreenGradientButton = (props) => {
+const BlueGreenGradienButton = (props) => {
     return (
         <Link to={props.link}
               className="w-full h-full inline-flex justify-center py-1.5 px-4 font-bold text-lg font-large rounded-md text-white bg-gradient-to-br from-mjol-blue-base to-green-200 hover:from-green-200 hover:to-mjol-blue-base"
@@ -12,7 +16,7 @@ const BlueGreenGradientButton = (props) => {
     )
 }
 
-const DarkBlueGradientButton = (props) => {
+const DarkBlueGradienButton = (props) => {
     return (
         <Link to={props.link}
               className="w-full h-full inline-flex justify-center py-1.5 px-4 font-bold text-lg font-large rounded-md text-white bg-gradient-to-br from-mjol-light-blue to-mjol-blue-base hover:from-mjol-blue-base hover:to-mjol-light-blue"
@@ -34,10 +38,10 @@ const GreetingBlock = () => {
             </div>
             <div className="grid grid-cols-10">
                 <div className="col-start-1 col-end-4 md:col-start-1 md:col-end-3">
-                    <DarkBlueGradientButton title={"Explore"} link={"/nfts"}/>
+                    <DarkBlueGradienButton title={"Explore"} link={"/nfts"}/>
                 </div>
                 <div className="col-start-5 col-end-8 md:col-start-4 md:col-end-6">
-                   <BlueGreenGradientButton title={"Create"} link={"/create-nft"}/>
+                   <BlueGreenGradienButton title={"Create"} link={"/create-nft"}/>
                 </div>
             </div>
         </div>

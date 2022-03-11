@@ -1,5 +1,5 @@
 import React from "react";
-import {getCurrentWallet} from "../business-logic/near/wallet/wallet";
+import {wallet} from "../business-logic/near/enviroment/near";
 
 export interface SignedInProps {
     accountId: string,
@@ -7,7 +7,6 @@ export interface SignedInProps {
 }
 
 function withAuthData<T>(Child: React.ComponentType<T & SignedInProps>):React.FC<T> {
-    const wallet = getCurrentWallet()
     return (props) =>
         <Child {...props}
                accountId={wallet.getAccountId()}

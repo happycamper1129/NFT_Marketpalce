@@ -1,9 +1,14 @@
 import {formatPrice} from "../business-logic/near/api/utils";
-import {getMarketNftVerification} from "../business-logic/whitelisted.contract";
+import {
+    getMarketNftVerification,
+    getMintbaseSiteInfo,
+    getNftMintedSiteInfo
+} from "../business-logic/whitelisted.contract";
 import {MarketToken} from "./generated/graphql";
 import {GridToken} from "../business-logic/models/nft";
+import {ContractVerificationStatus} from "../business-logic/models/contract";
 
-export const convertToMarketToken = (token: Omit<MarketToken, "id" | "listingTimestamp">): GridToken => ({
+export const convertToEntity = (token: Omit<MarketToken, "id" | "listingTime">): GridToken => ({
     ...token,
     price: formatPrice(token.price),
     mintedSiteLink: token.mintSiteLink ? token.mintSiteLink : '',

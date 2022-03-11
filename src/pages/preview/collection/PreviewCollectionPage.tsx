@@ -36,7 +36,7 @@ const PreviewCollectionPage: React.FC = () => {
         return () => {
             dispatch(previewCollectionSlice.actions.reset())
         }
-    }, [collectionId, contractId, filterTab, dispatch])
+    }, [collectionId, dispatch])
 
     if (!collectionId || !contractId || !filterTab) {
         return <NotFoundPage/>

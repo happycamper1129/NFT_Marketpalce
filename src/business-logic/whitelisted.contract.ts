@@ -6,8 +6,7 @@ export enum WhitelistedContract {
     MjolNear = "mjol.near",
     Paras = "x.paras.near",
     NearPunks = "near-punks.near",
-    NEARNauts = "nearnautnft.near",
-    AntisocialApeClub = 'asac.near'
+    NEARNauts = "nearnautnft.near"
 }
 
 export const verifiedContracts = new Set(Object.values(WhitelistedContract) as string[])
@@ -58,12 +57,6 @@ export const getNftMintedSiteInfo = (nft: any, contractId: ContractId): TokenMin
             return {
                 mintedSiteName: "NEARNauts",
                 mintedSiteLink: "https://www.nearnauts.io/#/nautview",
-                verification: ContractVerificationStatus.Verified
-            }
-        case WhitelistedContract.AntisocialApeClub:
-            return {
-                mintedSiteName: "AntisocialApeClub",
-                mintedSiteLink: "https://antisocialape.club",
                 verification: ContractVerificationStatus.Verified
             }
         default:

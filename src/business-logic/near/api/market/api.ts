@@ -1,4 +1,4 @@
-import {marketViewFunction} from "../../enviroment/rpc";
+import {marketViewFunction} from "../rpc";
 import {AccountId, ContractId, NumberAmount, Optional, StringAmount, TokenId} from "../../../models/types";
 import {buildUID, formatOptionalPrice, formatPrice} from "../utils";
 import {MarketResponseTokens, MarketResponseToken, ResponseTokenPrices} from "../types/response/market";

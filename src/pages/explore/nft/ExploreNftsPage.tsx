@@ -8,7 +8,7 @@ import {
     MarketToken_OrderBy,
     useMarketTokensQuery
 } from "../../../graphql/generated/graphql";
-import {convertToMarketToken} from "../../../graphql/utils";
+import {convertToEntity} from "../../../graphql/utils";
 import PaginationCardList from "../../../components/CardList/PaginationCardList";
 import PriceRangeFilter from "../../../components/Filter/popup/PriceRangeFilter";
 import SortFilter from "../../../components/Filter/popup/sort/SortFilter";
@@ -48,7 +48,7 @@ export const tokenSortOptions: Record<TokenSortName, TokenSortOption> = {
         name: TokenSortName.PriceHighToLow
     },
     [TokenSortName.RecentlyAdded]: {
-        by: MarketToken_OrderBy.ListingTimestamp,
+        by: MarketToken_OrderBy.ListingTime,
         direction: OrderDirection.Desc,
         name: TokenSortName.RecentlyAdded
     }
@@ -108,7 +108,7 @@ const ExploreNftsPage = () => {
         setHasMore(true)
     }, [filters])
 
-    const tokens = data?.marketTokens.map(convertToMarketToken) || []
+    const tokens = data?.marketTokens.map(convertToEntity) || []
 
     return (
         <div className="max-w-screen-2xl mx-auto">

@@ -1,6 +1,6 @@
 import {NftAPI} from "../../get-utils";
-import {viewFunction} from "../../enviroment/rpc";
-import {ApprovedToken} from "../../../models/nft";
+import {viewFunction} from "../rpc";
+import {ApprovedToken, Token} from "../../../models/nft";
 import {buildUID, getPrice} from "../utils";
 import {ResponseTokenPrices} from "../types/response/market";
 import {marketAPI} from "../market";
@@ -11,6 +11,11 @@ import {MARKET_CONTRACT_ID} from "../../enviroment/contract-names";
 import {NearCoreToken} from "../types/token";
 
 const isIPFS = require('is-ipfs')
+
+const DODIK_MEDIA_LIST:  Map<string, string> = new Map([
+    ["asac.near", 'https://ipfs.io/ipfs/bafybeicj5zfhe3ytmfleeiindnqlj7ydkpoyitxm7idxdw2kucchojf7v4/'],
+    ["tayc-nft.near", 'https://ipfs.io/ipfs/QmXQEfLTs8W3968eVZrAwfY6oTN4UphyADdvbV2jop6S89/']
+]);
 
 function getRealUrl(url: string, urlHash?: string, contractId?: string) {
     let storageLink = 'https://ipfs.fleek.co/ipfs/';
@@ -23,6 +28,9 @@ function getRealUrl(url: string, urlHash?: string, contractId?: string) {
         if (url.startsWith("http")) {
             return url;
         } else {
+            if (contractId !== undefined && DODIK_MEDIA_LIST.has(contractId)){
+                return DODIK_MEDIA_LIST.get(contractId) + url;
+            }
             return storageLink + url;
         }
     }

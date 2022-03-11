@@ -1,8 +1,9 @@
 import React, {Fragment} from 'react'
 import {Popover, Transition, Menu} from '@headlessui/react'
+import classNames from "../../utils/css-utils";
 import {OpenMenuButton} from "../../components/Common/Navbar/MobileButtons";
 import {TabsDropDownMenu} from "../../components/Common/Navbar/TabDropDownMenu";
-import {getCurrentWallet} from "../../business-logic/near/wallet/wallet";
+import {signIn, wallet} from "../../business-logic/near/enviroment/near";
 import {IoIosRocket} from 'react-icons/io'
 import {SiGitbook} from 'react-icons/si'
 import LogoLink from "../../components/Common/Links/LogoLink";
@@ -35,15 +36,11 @@ const Navbar = React.memo(() => {
                             <div key={name} className="cursor-pointer inline-flex gap-2 items-center group opacity-50">
                                 {name === "Launchpad" ?
                                     <p className={"text-transparent bg-clip-text font-archivo bg-gradient-to-r" +
-                                        " from-mjol-blue-base to-blue-600 group-hover:text-blue-500 text-md font-archivo font-bold"}
-                                       data-tip={"Coming soon!"}>
+                                    " from-mjol-blue-base to-blue-600 group-hover:text-blue-500 text-md font-archivo font-bold"}
+                                    data-tip={"Coming soon!"}>
                                         {name}
-                                    </p> :
-                                    <a className={"text-slate-500 group-hover:text-gray-700 text-md font-archivo font-bold"}
-                                       href={"https://oleg-bobrov.gitbook.io/mjolnear/"}
-                                       target="_blank"
-                                       rel="noreferrer"
-                                    >
+                                    </p> : <a className={"text-slate-500 group-hover:text-gray-700 text-md font-archivo font-bold"}
+                                    href={"https://oleg-bobrov.gitbook.io/mjolnear/"} target="_blank">
                                         {name}
                                     </a>}
                                 {name === "Launchpad"
@@ -54,14 +51,14 @@ const Navbar = React.memo(() => {
                             </div>
                         ))}
                     </div>
-                    {getCurrentWallet().isSignedIn()
+                    {wallet.isSignedIn()
                         ?
                         <div className="flex items-center justify-end lg:flex-1 lg:w-0">
                             <TabsDropDownMenu name="Profile" tabs={profileTabs}/>
                         </div>
                         :
                         <div className="flex items-center justify-end lg:flex-1 lg:w-0">
-                            <button onClick={() => getCurrentWallet().requestSignIn()}
+                            <button onClick={signIn}
                                     className="inline-flex justify-center py-1.5 px-4 font-bold text-md font-bold rounded-md text-white bg-gradient-to-br from-mjol-blue-base to-green-200 hover:from-green-200 hover:to-mjol-blue-base"
                             >
                                 Sign in
@@ -92,14 +89,11 @@ const Navbar = React.memo(() => {
                                     <div className="px-5 flex flex-col gap-3 pt-5">
                                         <MobileTabSection name="Explore" tabs={exploreTabs}/>
                                         <MobileTabSection name="Create" tabs={createTabs}/>
-                                        {getCurrentWallet().isSignedIn()
+                                        {wallet.isSignedIn()
                                             ?
                                             <MobileTabSection name="Profile" tabs={profileTabs}/>
                                             :
-                                            <BlueGreenGradientButton title="Sign in"
-                                                                     onClick={
-                                                                         () => getCurrentWallet().requestSignIn()
-                                                                     }/>
+                                            <BlueGreenGradientButton title="Sign in" onClick={signIn}/>
                                         }
                                     </div>
                                 </Menu.Items>

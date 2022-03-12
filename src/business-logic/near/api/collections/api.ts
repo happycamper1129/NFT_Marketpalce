@@ -1,5 +1,4 @@
 import {AccountId, CollectionId, ContractId, Optional} from "../../../models/types";
-import {mjolViewFunction, viewFunction} from "../rpc";
 import {
     CollectionsBatchResponse,
     CollectionTokensResponse,
@@ -12,7 +11,8 @@ import {MJOL_CONTRACT_ID} from "../../enviroment/contract-names";
 import {emptyTokensBatchResponse} from "../types/response/core";
 import {batchRequest} from "../batch-request";
 import {nftAPI} from "../nfts";
-import {DODIK_GET_LIST, DODIK_INDEX_LIST, WhitelistedContract} from "../../../whitelisted.contract";
+import {DODIK_GET_LIST} from "../../../whitelisted.contract";
+import {mjolViewFunction, viewFunction} from "../../enviroment/rpc";
 
 export const collectionAPI = {
 
@@ -82,15 +82,12 @@ export const collectionAPI = {
 
     fetchWhitelistedCollectionNfts: (contractId: ContractId, from: number, limit: number): Promise<NearToken[]> => {
         if (DODIK_GET_LIST.has(contractId)) {
-            let indices = [];
-            let diff = DODIK_INDEX_LIST.get(contractId) || 0;
-            for (let i = diff; i < limit + diff; i++) {
+            let indices = []
+            for (let i = 0; i < limit; i++) {
                 indices.push(from + i)
             }
             return batchRequest(indices, i => nftAPI.fetchNft(contractId, i.toString()))
-                .then(result => {
-                    return result.values.filter(nft => !!nft)
-                })
+                .then(result => result.values.filter(nft => !!nft))
         }
         return viewFunction({
             contractId,

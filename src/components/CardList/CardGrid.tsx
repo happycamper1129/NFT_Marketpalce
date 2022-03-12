@@ -31,10 +31,9 @@ const CardGrid: React.FC<PropTypes> = ({
         <>
             {tokens.length === 0 && !fetching
                 ? isCollectionNFTs
-                    ? <EmptyCardList mainDescription="No items on sale"
-                                     //footerDescription="You can Mint your own NFTs into collection via"
-                                     //footerLink="/create-token"
-                                     //footerLinkName="creation"
+                    ? <EmptyCardList footerDescription="You can Mint your ow NFTs into collection via"
+                                     footerLink="/create-token"
+                                     footerLinkName="creation"
                     />
                     : <EmptyCardList/>
                 : <CardsGridContainer>

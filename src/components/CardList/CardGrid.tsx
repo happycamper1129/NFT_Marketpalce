@@ -2,14 +2,12 @@ import Card from "../Card/Card";
 import React from "react";
 import {GridToken} from "../../business-logic/models/nft";
 import CardsGridContainer from "../Common/Grid/CardsGridContainer";
-import {ScrollPosition} from "react-lazy-load-image-component";
 import {buildUID} from "../../business-logic/near/api/utils";
 import EmptyCardList from "./EmptyCardList";
 
 interface PropTypes {
     tokens: GridToken[],
     fetching: boolean,
-    scrollPosition?: ScrollPosition,
     isCollectionNFTs?: boolean
 }
 
@@ -19,21 +17,20 @@ interface PropTypes {
  * @param tokens array of {@link Token} items
  * @param fetching boolean value which determines fetching status
  * @param isCollectionNfts boolean value than changes the empty card animation footer
- * @param scrollPosition
  */
 const CardGrid: React.FC<PropTypes> = ({
     tokens,
     fetching,
-    scrollPosition,
     isCollectionNFTs = false
 }) => {
     return (
         <>
             {tokens.length === 0 && !fetching
                 ? isCollectionNFTs
-                    ? <EmptyCardList footerDescription="You can Mint your ow NFTs into collection via"
-                                     footerLink="/create-token"
-                                     footerLinkName="creation"
+                    ? <EmptyCardList mainDescription="No items on sale"
+                                     //footerDescription="You can Mint your own NFTs into collection via"
+                                     //footerLink="/create-token"
+                                     //footerLinkName="creation"
                     />
                     : <EmptyCardList/>
                 : <CardsGridContainer>

@@ -6,7 +6,7 @@ import {
     SENDER_WALLET_SIGNED_IN_STATE_KEY
 } from "./business-logic/near/wallet/sender-wallet";
 import {WalletContext} from './business-logic/near/wallet/wallet';
-import {BrowserRouter} from "react-router-dom";
+import {HashRouter} from "react-router-dom";
 import {Route, Routes} from "react-router";
 import LandingPage from "./pages/landing/LandingPage";
 import ExploreNftsPage from "./pages/explore/nft/ExploreNftsPage";
@@ -17,7 +17,11 @@ import CreateCollectionPage from "./pages/create/collection/CreateCollectionPage
 import ProfileNftsPage from "./pages/profile/nfts/ProfileNftsPage";
 import ProfileCollectionsPage from "./pages/profile/collections/ProfileCollectionsPage";
 import NotFoundPage from "./pages/not-found/NotFoundPage";
+import ScrollToTopButton from "./components/Common/Buttons/ScrollToTopButton";
 import PreviewNftMatchRouterParams from "./pages/preview/nft/PreviewNftMatchRouterParams";
+import ScrollToTop from "./hoc/ScrollToTop";
+import {ToastContainer} from "react-toastify";
+import WithURLInfo from "./hoc/WithURLInfo";
 import PageLayout from "./components/Layout/PageLayout";
 
 
@@ -89,7 +93,7 @@ export default function App() {
 
 
     return (
-        <BrowserRouter>
+        <HashRouter>
             <Routes>
                 <Route path="/" element={<PageLayout/>}>
                     <Route index element={<LandingPage/>}/>
@@ -111,6 +115,6 @@ export default function App() {
                     <Route path="*" element={<NotFoundPage/>}/>
                 </Route>
             </Routes>
-        </BrowserRouter>
+        </HashRouter>
     )
 }

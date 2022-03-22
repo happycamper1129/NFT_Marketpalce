@@ -17,11 +17,7 @@ import CreateCollectionPage from "./pages/create/collection/CreateCollectionPage
 import ProfileNftsPage from "./pages/profile/nfts/ProfileNftsPage";
 import ProfileCollectionsPage from "./pages/profile/collections/ProfileCollectionsPage";
 import NotFoundPage from "./pages/not-found/NotFoundPage";
-import ScrollToTopButton from "./components/Common/Buttons/ScrollToTopButton";
 import PreviewNftMatchRouterParams from "./pages/preview/nft/PreviewNftMatchRouterParams";
-import ScrollToTop from "./hoc/ScrollToTop";
-import {ToastContainer} from "react-toastify";
-import WithURLInfo from "./hoc/WithURLInfo";
 import PageLayout from "./components/Layout/PageLayout";
 
 
@@ -105,7 +101,8 @@ export default function App() {
                     <Route path="collections">
                         <Route index
                                element={<ExploreCollectionsPage/>}/>
-                        <Route path=":contractId/:collectionId/:filterTab" element={<PreviewCollectionPage/>}/>
+                        <Route path=":contractId/:collectionId/:filterTab"
+                               element={<PreviewCollectionPage/>}/>
                         <Route path="new" element={<CreateCollectionPage/>}/>
                     </Route>
                     <Route path="profile">

@@ -1,6 +1,6 @@
 overwrite: true
-schema: "https://api.thegraph.com/subgraphs/name/mjolnear/backupv2"
-documents: "src/graphql/query/**/*.graphql"
+schema: "https://api.thegraph.com/subgraphs/name/mjolnear/indexer"
+documents: "src/graphql/**/*.graphql"
 generates:
   src/graphql/generated/graphql.tsx:
     plugins:

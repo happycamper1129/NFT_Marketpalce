@@ -1,48 +1,30 @@
-import React, {useMemo, useState} from 'react';
-import {useDailyMarketStatsQuery} from "../../../graphql/generated/graphql";
+import React from 'react';
+import {useMarketStatisticsQuery} from "../../../graphql/generated/graphql";
 import MarketVolumeChart, {MarketVolumeChartPoint} from "./MarketVolumeChart";
 import {utils} from "near-api-js";
 import dayjs from "dayjs";
-import {nowUTC} from "../../../utils/time";
 
 const MarketStats = () => {
 
-    const now = useMemo(
-        () => dayjs(nowUTC()).hour(0).minute(0).second(0).millisecond(0),
-        []
-    )
-
-    console.log(Date.now())
-    // console.log(now)
-    // const today = new Date().setDate(now)
-    //
-    // console.log(today)
-
-    console.log(now.unix())
-
-    const [fromTimestamp, setFromTimestamp] = useState("0")
+    const now = Date.now()
+    const today = new Date().setDate(now)
 
 
-    const {data, loading} = useDailyMarketStatsQuery({
+
+    const {data, loading} = useMarketStatisticsQuery({
         variables: {
-            fromTimestamp
+            fromTimestamp: "100000"
         }
     })
 
-    const chartData: MarketVolumeChartPoint[] = useMemo(
-        () => data?.dailyMarketStats.map(dailyStats => ({
-            date: parseInt(dailyStats.timestamp),
-            volume: parseFloat(utils.format.formatNearAmount(dailyStats.volume, 10)),
-            sales: parseInt(dailyStats.sales)
-        })) || [],
-        [data]
-    )
+    const chartData: MarketVolumeChartPoint[] = data?.dailyMarketStats.map(point => ({
+        date: parseInt(point.timestamp),
+        volume: parseFloat(utils.format.formatNearAmount(point.volume, 3))
+    })) || []
 
     return (
         <div className="flex justify-center px-3 pt-10">
-            <MarketVolumeChart data={chartData}
-                               loading={loading}
-            />
+            <MarketVolumeChart data={chartData}/>
         </div>
     );
 };

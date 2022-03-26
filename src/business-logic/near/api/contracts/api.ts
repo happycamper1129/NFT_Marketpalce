@@ -1,6 +1,6 @@
 import {AccountId, ContractId, TokenId} from "../../../models/types";
 import {fetchWithTimeout} from "../core";
-import {TContractResponse, ContractStatusResponseCode} from "../types/response/contracts";
+import {TContractResponse, ContractStatusResponse, ContractStatusResponseCode} from "../types/response/contracts";
 
 
 export const contractAPI = {
@@ -17,6 +17,7 @@ export const contractAPI = {
         ).catch(() => []),
 
     fetchContract: (contractId: ContractId): Promise<TContractResponse | undefined> => {
+        // const url = `http://localhost:7010/api.mjolnear.com/contracts/${contractId}`
         const url = `https://mjolnear-contracts-indexer.herokuapp.com/api.mjolnear.com/contracts/${contractId}`
         return fetch(url)
             .then(response => response.json())

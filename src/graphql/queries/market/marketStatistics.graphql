@@ -1,5 +1,5 @@
-query dailyMarketStats(
-    $fromTimestamp: BigInt
+query marketStatistics(
+    $fromTimestamp: BigInt!
 ) {
     dailyMarketStats(
         where: {

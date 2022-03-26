@@ -32,7 +32,6 @@ const TokenPreviewMainBlock: React.FC<TokenPreviewProps> = ({
             <TokenDetails contractId={token.contractId}
                           tokenId={token.tokenId}
                           ownerId={token.ownerId}
-                          copies={token.copies}
             />
             <TokenPayoutDetails payouts={payouts}/>
         </div>

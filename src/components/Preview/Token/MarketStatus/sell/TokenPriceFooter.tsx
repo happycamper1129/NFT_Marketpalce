@@ -12,17 +12,21 @@ const TokenPriceFooter: React.FC<TTokenPriceFooterProps> = ({
     isLoading
 }) => {
     return (
-        <div className="items-center flex flex-col mt-3 w-full font-archivo">
+        <div className="items-center flex flex-col mt-3 w-full">
             <Hr color="bg-gray-400"/>
             <p className="text-black text-sm mt-3 text-center opacity-60">
                 You will be redirected to
                 NEAR Web Wallet to confirm your transaction.
             </p>
-            <DarkBlueGradientButton title="Complete listing"
-                                    width="w-full md:max-w-[75%] mt-4"
-                                    isLoading={isLoading}
-                                    disabled={!isPriceValid}
-            />
+            <div className="mt-4">
+                <DarkBlueGradientButton title="Complete listing"
+                                        isLoading={isLoading}
+                                        disabled={!isPriceValid}
+                                        style={{
+                                            width: 300
+                                        }}
+                />
+            </div>
         </div>
     );
 };

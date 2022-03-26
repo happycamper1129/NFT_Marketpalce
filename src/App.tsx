@@ -1,4 +1,11 @@
 import React from 'react'
+import {
+    configureSenderWallet,
+    removeSenderLoginRes,
+    saveSenderLoginRes,
+    SENDER_WALLET_SIGNED_IN_STATE_KEY
+} from "./business-logic/near/wallet/sender-wallet";
+import {WalletContext} from './business-logic/near/wallet/wallet';
 import {HashRouter} from "react-router-dom";
 import {Route, Routes} from "react-router";
 import LandingPage from "./pages/landing/LandingPage";
@@ -15,6 +22,72 @@ import PageLayout from "./components/Layout/PageLayout";
 
 
 export default function App() {
+
+    // const signedInStateReducer = (
+    //     state: { isSignedIn: boolean, accountId?: string },
+    //     action: { type: 'signIn' | 'signOut' }
+    // ) => {
+    //     switch (action.type) {
+    //         case 'signIn':
+    //             return {
+    //                 isSignedIn: true,
+    //                 accountId: undefined
+    //             };
+    //         case 'signOut':
+    //             return {
+    //                 isSignedIn: false,
+    //             };
+    //     }
+    // };
+    //
+    // const SignedInStateReducer = useReducer(signedInStateReducer, {
+    //     isSignedIn: false,
+    // });
+    //
+    // const [signedInState, signedInStateDispatch] = SignedInStateReducer;
+    //
+    //
+    // useEffect(() => {
+    //     if (webWallet.isSignedIn()) {
+    //         signedInStateDispatch({type: 'signIn'});
+    //     }
+    // }, [webWallet.isSignedIn()]);
+    //
+    //
+    // useEffect(() => {
+    //     console.log('trigerred')
+    //     const windowRef = window as any
+    //     setTimeout(() => {
+    //         if (windowRef.near) {
+    //             windowRef.near.on('signIn', () => {
+    //                 saveSenderLoginRes();
+    //                 signedInStateDispatch({type: 'signIn'});
+    //             });
+    //             windowRef.near.on('accountChanged', (changedAccountId: string) => {
+    //                 window.location.reload();
+    //                 saveSenderLoginRes(changedAccountId);
+    //             });
+    //             windowRef.near.on('signOut', () => {
+    //                 removeSenderLoginRes();
+    //                 signedInStateDispatch({type: 'signOut'});
+    //             });
+    //         }
+    //
+    //         const signedInRes = localStorage.getItem(
+    //             SENDER_WALLET_SIGNED_IN_STATE_KEY
+    //         );
+    //
+    //         if (windowRef.near && signedInRes && !configureSenderWallet(window)?.isSignedIn()) {
+    //             configureSenderWallet(window)
+    //                 ?.requestSignIn()
+    //                 .then(() => {
+    //                     saveSenderLoginRes();
+    //                 });
+    //         }
+    //     }, 200);
+    // }, [window, (window as any)?.near]);
+
+
     return (
         <HashRouter>
             <Routes>

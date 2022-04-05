@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {memo} from 'react';
 import InfiniteScroll from "react-infinite-scroll-component";
-import CardGrid from "./CardGrid";
-import {GridToken} from "../../business-logic/types/nft";
 import CardListLoader from "./CardListLoader";
+import CardGrid from "./CardGrid";
+import {GridToken} from "../../business-logic/models/nft";
 
 
 interface PaginationCardListProps {
@@ -26,14 +26,13 @@ const PaginationCardList: React.FC<PaginationCardListProps> = ({
             scrollThreshold="100px"
             hasMore={hasMore}
             className={"py-5 " + (tokens.length !== 0 ? "space-y-6 lg:space-y-7 2xl:space-y-10" : "")}
-            loader={<></>}
+            loader={<CardListLoader/>}
             dataLength={tokens.length}
         >
             <CardGrid tokens={tokens}
-                      loading={loading}
+                      fetching={loading}
                       isCollectionNFTs={isCollectionNFTs}
             />
-            {loading && hasMore && <CardListLoader/>}
         </InfiniteScroll>
     );
 };

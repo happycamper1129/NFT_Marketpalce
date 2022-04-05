@@ -1,14 +1,13 @@
 import Card from "../Card/Card";
 import React, {memo} from "react";
-import {GridToken} from "../../business-logic/types/nft";
+import {GridToken} from "../../business-logic/models/nft";
 import CardsGridContainer from "../Common/Grid/CardsGridContainer";
-import {buildUID} from "../../near/api/utils";
+import {buildUID} from "../../business-logic/near/api/utils";
 import EmptyCardList from "./EmptyCardList";
-import {AnimatePresence, motion} from "framer-motion";
 
 interface TGridProps {
     tokens: GridToken[],
-    loading: boolean,
+    fetching: boolean,
     isCollectionNFTs?: boolean
 }
 
@@ -16,17 +15,17 @@ interface TGridProps {
  * Returns NFT items grid component
  *
  * @param tokens array of {@link Token} items
- * @param loading boolean value which determines fetching status
+ * @param fetching boolean value which determines fetching status
  * @param isCollectionNfts boolean value than changes the empty card animation footer
  */
 const CardGrid: React.FC<TGridProps> = ({
     tokens,
-    loading,
+    fetching,
     isCollectionNFTs = false
 }) => {
     return (
         <>
-            {tokens.length === 0 && !loading
+            {tokens.length === 0 && !fetching
                 ? isCollectionNFTs
                     ? <EmptyCardList mainDescription="No items for this collection on sale"/>
                     : <EmptyCardList/>

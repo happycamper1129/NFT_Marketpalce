@@ -1,6 +1,6 @@
-import {ContractId} from "./types/aliases";
-import {ContractVerificationStatus} from "./types/contract";
-import {TokenMintedInfo} from "./types/nft";
+import {ContractId} from "./models/types";
+import {ContractVerificationStatus} from "./models/contract";
+import {TokenMintedInfo} from "./models/nft";
 
 export enum WhitelistedContract {
     MjolNear = "mjol.near",

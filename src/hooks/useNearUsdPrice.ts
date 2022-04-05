@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {Optional} from "../business-logic/types/aliases";
+import {Optional} from "../business-logic/models/types";
 
 export const useNearUsdPrice = () => {
     const [usdPrice, setUsdPrice] = useState<Optional<number>>(null)

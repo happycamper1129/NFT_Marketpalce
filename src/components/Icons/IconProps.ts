@@ -5,7 +5,5 @@ export interface PixelIconProps {
 
 export interface IconProps {
     size?: number | string
-    fill?: string,
-    mx?: number
-    my?: number
+    fill?: string
 }

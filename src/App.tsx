@@ -4,8 +4,8 @@ import {
     removeSenderLoginRes,
     saveSenderLoginRes,
     SENDER_WALLET_SIGNED_IN_STATE_KEY
-} from "./near/wallet/sender-wallet";
-import {WalletContext} from './near/wallet/wallet';
+} from "./business-logic/near/wallet/sender-wallet";
+import {WalletContext} from './business-logic/near/wallet/wallet';
 import {HashRouter} from "react-router-dom";
 import {Route, Routes} from "react-router";
 import LandingPage from "./pages/landing/LandingPage";
@@ -21,7 +21,6 @@ import PreviewNftMatchRouterParams from "./pages/preview/nft/PreviewNftMatchRout
 import PageLayout from "./components/Layout/PageLayout";
 import PreviewCollectionMatchRouterParams from "./pages/preview/collection/PreviewCollectionMatchRouterParams";
 import MintTokenPage from "./pages/create/nft/MintTokenPage";
-import MintCollectionPage from "./pages/create/collection/MintCollectionPage";
 
 
 export default function App() {
@@ -106,7 +105,7 @@ export default function App() {
                                element={<ExploreCollectionsPage/>}/>
                         <Route path=":contractId/:collectionId/:filterTab"
                                element={<PreviewCollectionMatchRouterParams/>}/>
-                        <Route path="new" element={<MintCollectionPage/>}/>
+                        <Route path="new" element={<CreateCollectionPage/>}/>
                     </Route>
                     <Route path="profile">
                         <Route index element={<NotFound404Page/>}/>

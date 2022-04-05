@@ -9,7 +9,7 @@ import {profileTokensSlice} from "../../../state/profile/nfts/tokens/slice";
 import {TAuthProps} from "../../../hoc/withAuthData";
 import BlueToggle from "../../../components/Common/Filters/Toggle/BlueToggle";
 import {WhitelistedContract} from "../../../business-logic/whitelisted.contract";
-import {ContractVerificationStatus} from "../../../business-logic/types/contract";
+import {ContractVerificationStatus} from "../../../business-logic/models/contract";
 
 
 const ProfileNftsFetch: React.FC<TAuthProps> = ({accountId}) => {
@@ -61,7 +61,7 @@ const ProfileNftsFetch: React.FC<TAuthProps> = ({accountId}) => {
                 ? <CardListLoader/>
                 : tokens.length === 0
                     ? <EmptyCardList/>
-                    : <CardGrid loading={fetching} tokens={filteredTokens}/>
+                    : <CardGrid fetching={fetching} tokens={filteredTokens}/>
             }
         </>
     );

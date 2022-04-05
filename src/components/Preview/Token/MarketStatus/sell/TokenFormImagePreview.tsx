@@ -1,5 +1,5 @@
 import React, {memo} from 'react';
-import {Optional} from "../../../../../business-logic/types/aliases";
+import {Optional} from "../../../../../business-logic/models/types";
 import {Img} from "react-image";
 
 interface TFormImagePreview {

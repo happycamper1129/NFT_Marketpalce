@@ -1,8 +1,8 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 import {whitelistedCollections} from "../../../../business-logic/whitelisted.collections";
-import {TokenCollectionMetadata} from "../../../../business-logic/models/nft";
-import {Optional} from "../../../../business-logic/models/types";
+import {TokenCollectionMetadata} from "../../../../business-logic/types/nft";
+import {Optional} from "../../../../business-logic/types/aliases";
 
 interface TokenPreviewTitleCollection {
     title: string

@@ -12,8 +12,7 @@ export enum WhitelistedContract {
     GrimmsArmy = "grimms.secretskelliessociety.near",
     NEARton = "nearton_nft.near",
     BillionaireBullsClub = "billionairebullsclub.near",
-    FreakyElves = "spin-nft-contract.near",
-    NearNymphs = "nymphs.near"
+    FreakyElves = "spin-nft-contract.near"
 }
 
 export const DODIK_GET_LIST = new Set<string>([
@@ -134,12 +133,6 @@ export const getNftMintedSiteInfo = (
             return {
                 mintedSiteName: "FreakyElves",
                 mintedSiteLink: "https://nft.spin.fi",
-                verification: ContractVerificationStatus.Verified
-            }
-        case WhitelistedContract.NearNymphs:
-            return {
-                mintedSiteName: "NearNymphs",
-                mintedSiteLink: "https://twitter.com/NearNymphs",
                 verification: ContractVerificationStatus.Verified
             }
         default:
